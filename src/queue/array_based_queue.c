@@ -37,7 +37,7 @@ bool is_queue_empty(struct Queue* queue)
 
 void enqueue(struct Queue* queue, int item)
 {
-    if (is_queue_full(queue))
+  if (is_queue_full(queue))
     return;
   queue->tail = (queue->tail + 1) % queue->capacity;
   queue->array[queue->tail] = item;
@@ -52,7 +52,7 @@ int dequeue(struct Queue* queue)
     return INT_MIN;
   int item = queue->array[queue->head];
   queue->head = (queue->head + 1) % queue->capacity;
-  queue->size = queue->size + 1;
+  queue->size = queue->size - 1;
   return item;
 }
 
@@ -65,6 +65,8 @@ int main()
   enqueue(queue, 2);
   enqueue(queue, 266);
   enqueue(queue, 111);
+  printf("queue size before: %d\n", queue->size);
   printf("%d dequeued from queue\n", dequeue(queue));
+  printf("queue size after: %d\n", queue->size);
   return 0;
 }
